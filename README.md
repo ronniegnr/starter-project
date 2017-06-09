@@ -1,2 +1,2 @@
 # samples
-Various sample and bootstrapping application
+Various sample and bootstrapping applications
