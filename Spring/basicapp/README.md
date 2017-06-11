@@ -4,7 +4,7 @@ A very basic applicatio with MVC architecture without any framework. The purpose
 
 Problems:
 
-1. Repository layers implementation is exposed in Service layer. This is 
+1. Repository layers implementation is exposed in Service layer.
 2. Service layers implementation is exposed in usage layer.
 
 Notes:
