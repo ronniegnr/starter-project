@@ -1,6 +1,6 @@
 # FitnessTracker
 
-A Hello World web application in Spring MVC 
+A Hello World web application in Spring MVC (XML Config)
 
 Notes:
 
