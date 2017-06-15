@@ -10,6 +10,7 @@
 
 1. Use the command 'mvn tomcat7:run'
 2. Try url 'http://localhost:8080/FitnessTracker/greeting'
+3. Test GET, POST from http://localhost:8080/FitnessTracker/attendee
 
 ## Features
 
