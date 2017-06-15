@@ -1,6 +1,4 @@
-# FitnessTracker
-
-### A Hello World web application in Spring MVC 4 with few features
+# A Hello World web application in Spring MVC 4 with few features
 
 ## Technologies
 
