@@ -1,27 +1,46 @@
 version: '3'
-
 services:
+  mysql:
+    image: mysql:5.7.29
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=spring-boot-mysql_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+    networks:
+      app_net:
+        ipv4_address: 172.18.18.10
 
-    mysql:
-      image: mysql:5.7.29
-      environment:
-        - MYSQL_DATABASE=spring-boot-mysql_db
-        - MYSQL_ROOT_PASSWORD=root
-      ports:
-         - "3308:3306"
+  redis:
+    image: redis
 
-    webapp:
-      image: adoptopenjdk/openjdk11:alpine-jre
-      depends_on:
-        - mysql
-        - redis
-      volumes:
-        #- ./application-prod.yml:/app/application-prod.yml
-        - ./build/libs/spring-boot-mysql-0.0.1-SNAPSHOT.jar:/app/app.jar
-      ports:
-        - "8080:8080"
-#      command: "java -jar /app/app.jar --spring.profiles.active=prod --spring.config.location=/app/application-prod.yml"
-      command: "java -jar /app/app.jar"
+  webapp:
+    image: adoptopenjdk/openjdk11:alpine-jre
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./build/libs/spring-boot-mysql-0.0.1-SNAPSHOT.jar:/app/app.jar
+    restart: always
+    ports:
+      - "8080:8080"
+    command: "java -jar /app/app.jar"
+    networks:
+      app_net:
+        ipv4_address: 172.18.18.11
 
-    redis:
-      image: redis
+volumes:
+  mysql_data: {}
+
+networks:
+  app_net:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.18.0/24
